@@ -13,7 +13,9 @@ class RequestHandler(Resource):
         self.parser = reqparse.RequestParser()
 
     def get(self):
-        return {"message": "this is a GET request."}, 200
+        message_get = 'usage: curl [IP address]:5000 -X PUT -H "multipart/form-data"' + \
+            '-F "uploading=@[file]"'
+        return {"message": message_get}, 200
 
     def put(self):
         self.parser.add_argument("uploading",

@@ -1,10 +1,12 @@
 # Implementation of a TF(IDF) algorithm
 # Monday December 27th, 2021
+# Modified Wednesday March 30th, 2022
 #
 import re
 import sys
 import nltk
 from nltk.corpus import stopwords
+from nltk.corpus import words
 
 
 def load(path):
@@ -31,12 +33,31 @@ def tf(text, list_size=5):
         'good', 'am', 'they', 'than', 'man', 'men', 'cannot', 'own', 'both',
         'then', 'much', 'dr', 'based', 'there', 's', 'says', 'say', 'upon',
         'go', 'though', 'why', 'see', 'wa', 'way', 'can', 'take', 'type',
+        'make', 'made', 'did', 'been', 'very', 'could', 'other', 'him',
+        'many', 'more', 'might', 'now', 'come', 'came',
+        'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
+        'nine', 'ten',
+        'little', 'find', 'found', 'great', 'time', 'thing', 'ha', 'again',
+        'u', 't', 'd', 'm', 're', 'oh', 've', 'll', 'only', 'night', 'through',
+        'place', 'went', 'well', 'day', 'up', 'down', 'said', 'she', 'over',
+        'where', 'when', 'why', 'what', 'how', 'wa', 'sir',
+        'mr', 'mrs', 'ms', 'like', 'just', 'know', 'knew', 'known',
+        'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh',
+        'eighth', 'nineth', 'tenth',
+        'about', 'above', 'across', 'after', 'against', 'along', 'among',
+        'around', 'at', 'before', 'behind', 'between', 'beyond', 'but', 
+        'by', 'concerning', 'despite', 'down', 'during', 'except', 'following',
+        'for', 'from', 'in', 'including', 'into', 'like', 'near', 'of', 'off',
+        'on', 'onto', 'out', 'over', 'past', 'plus', 'since', 'throughout',
+        'to', 'towards', 'under', 'until', 'up', 'upon', 'up to', 'with', 'within',
+        'without',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
+
     ]
 
     # stopwords
     # sw = stopwords.words('english')
-    # # TODO: add regexp to exclude all numbers, stopwords + that
+    # TODO: add regexp to exclude all numbers, stopwords + that
     # that should ensure better results than NLTK
     sw = stopwords_
 
@@ -63,7 +84,7 @@ def tf(text, list_size=5):
     while count <= list_size:
         tag = frequency[i][0]
         i += 1
-        if not (tag in sw) and not tag.isdigit():
+        if not (tag in sw) and not tag.isdigit() and tag in words.words():
             results.append(tag)
             count += 1
 
