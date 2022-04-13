@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
+from waitress import serve
 import werkzeug
 import os
 import tf
@@ -41,4 +42,7 @@ class RequestHandler(Resource):
 api.add_resource(RequestHandler, "/")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # this is the location for waitress.serve(app) 
+    # instead of app.run()
+    serve(app, host='0.0.0.0', port=5000)
+
